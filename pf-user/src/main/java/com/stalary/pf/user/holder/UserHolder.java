@@ -5,8 +5,6 @@ import com.stalary.pf.user.data.dto.User;
 /**
  * UserHolder
  *
- * @author lirongqian
- * @since 2018/04/16
  */
 public class UserHolder {
 

@@ -6,6 +6,7 @@
 package com.stalary.pf.outside.data;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
@@ -16,6 +17,7 @@ import lombok.NoArgsConstructor;
  */
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class UploadAvatar {
 
     private Long userId;

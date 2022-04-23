@@ -16,4 +16,6 @@ public class Constant {
 
     /** 接收简历 **/
     public static final String RECEIVE_RESUME = "receive_resume";
+
+    public static final String CONSUMER_GROUP = "recruit";
 }

@@ -19,10 +19,7 @@ import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
 
-/**
- * 跨域配置
- * @author stalary
- */
+
 @Configuration
 public class CorsConfig {
     private static final String MAX_AGE = "18000L";

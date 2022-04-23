@@ -1,19 +1,58 @@
 server:
   port: 10000
-  user: http://usercenter.stalary.com
+  user: 192.168.0.106:7100
   max-http-header-size: 8192
 spring:
   cloud:
     nacos:
+      config:
+        server-addr: 182.61.27.77:8848
       discovery:
-        server-addr: nacos.stalary.com
+        server-addr: 182.61.27.77:8848
     gateway:
       discovery:
         locator:
           enabled: true
           lower-case-service-id: true
-  zipkin:
-    base-url: http://zipkin.stalary.com
+#      routes:
+#        - id: push
+#          uri: lb://pf-push
+#          predicates:
+#            - Path=/push/**
+#        - id: ws
+#          uri: lb://pf-push
+#          predicates:
+#            - Path=/push/**
+#        - id: outside
+##          uri: lb://pf-outside
+#          uri: localhost:10012
+#          predicates:
+#            - Path=/outside/**
+#        - id: message
+##          uri: lb://pf-message
+#          uri: localhost:10013
+#          predicates:
+#            - Path=/message/**
+#        - id: user
+##          uri: lb://pf-user
+#          uri: localhost:10015
+#          predicates:
+#            - Path=/user/**
+#        - id: recruit
+##          uri: lb://pf-recruit
+#          uri: localhost:10016
+#          predicates:
+#            - Path=/recruit/**
+#        - id: company
+##          uri: lb://pf-recruit
+#          uri: localhost:10016
+#          predicates:
+#            - Path=/company/**
+#        - id: resume
+##          uri: lb://pf-resume
+#          uri: localhost:10017
+#          predicates:
+#            - Path=/resume/**
   sleuth:
     sampler:
       probability: 1.0

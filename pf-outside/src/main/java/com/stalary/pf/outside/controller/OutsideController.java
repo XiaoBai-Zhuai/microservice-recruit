@@ -40,12 +40,12 @@ public class OutsideController {
 
     /**
      * @method code 发送短信验证码的接口
-     * @param phone 手机号
+     * @param email 邮箱
      **/
     @GetMapping("/code")
     public ResponseMessage code(
-            @RequestParam String phone) {
-        String code = smsService.sendCode(phone);
+            @RequestParam String email) {
+        String code = mailService.sendVerCode(email);
         if (StringUtils.isNotEmpty(code)) {
             return ResponseMessage.successMessage("发送成功");
         } else {

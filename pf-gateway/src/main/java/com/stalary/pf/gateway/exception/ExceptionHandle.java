@@ -26,11 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author Stalary
- * @description
- * @date 2018/04/14
- */
+
 @Slf4j
 public class ExceptionHandle implements ErrorWebExceptionHandler {
 

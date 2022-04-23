@@ -3,8 +3,6 @@ package com.stalary.pf.resume.data.constant;
 /**
  * RedisKeys
  *
- * @author lirongqian
- * @since 2018/04/20
  */
 public class RedisKeys {
 

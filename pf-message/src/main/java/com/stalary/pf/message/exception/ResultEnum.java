@@ -2,11 +2,7 @@ package com.stalary.pf.message.exception;
 
 import lombok.Getter;
 
-/**
- * @author Stalary
- * @description
- * @date 2018/03/24
- */
+
 public enum ResultEnum {
     UNKNOW_ERROR(500, "服务器错误"),
 

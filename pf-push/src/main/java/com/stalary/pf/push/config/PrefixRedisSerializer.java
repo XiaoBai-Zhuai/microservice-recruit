@@ -11,8 +11,6 @@ import java.nio.charset.Charset;
 /**
  * PrefixRedisSerializer
  *
- * @author lirongqian
- * @since 2018/10/21
  */
 @Component
 @Slf4j

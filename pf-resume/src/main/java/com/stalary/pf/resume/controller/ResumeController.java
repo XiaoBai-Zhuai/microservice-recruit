@@ -13,9 +13,7 @@ import javax.annotation.Resource;
 /**
  * ResumeController
  *
- * @author lirongqian
  * @description 简历操作接口
- * @since 2018/04/16
  */
 @RestController
 @RequestMapping("/resume")

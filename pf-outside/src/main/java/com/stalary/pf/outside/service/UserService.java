@@ -30,6 +30,7 @@ public class UserService {
     private QiNiuService qiNiuService;
 
     public ResponseMessage uploadAvatar(Long userId, MultipartFile avatar) {
+        System.out.println("userId是什么: " + userId);
         String name = Constant.getKey(Constant.USER_AVATAR, String.valueOf(userId));
         String url = qiNiuService.uploadPicture(avatar, name);
         return userClient.uploadAvatar(new UploadAvatar(userId, url));

@@ -5,11 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/**
- * @author Stalary
- * @description
- * @date 2018/4/14
- */
+
 @Repository
 public interface CompanyRepo extends BaseRepo<CompanyEntity, Long> {
 

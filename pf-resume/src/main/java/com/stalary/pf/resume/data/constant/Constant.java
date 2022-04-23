@@ -8,8 +8,6 @@ import java.util.List;
 /**
  * Constant
  * 存储常量
- * @author lirongqian
- * @since 2018/04/14
  */
 public class Constant {
 

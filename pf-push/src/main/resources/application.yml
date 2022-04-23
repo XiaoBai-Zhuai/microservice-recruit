@@ -5,14 +5,24 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: nacos.stalary.com
+        server-addr: 182.61.27.77:8848
     sentinel:
       transport:
         port: 10003
-        dashboard: sentinel.stalary.com
+        dashboard: 182.61.27.77:8858
   zipkin:
     base-url: http://zipkin.stalary.com
   sleuth:
     sampler:
       probability: 1.0
+
+  redis:
+    host: 182.61.27.77
+    timeout: 5000ms
+    port: 6379
+    lettuce:
+      pool:
+        max-idle: 10
+        max-active: 10
+        min-idle: 1
 

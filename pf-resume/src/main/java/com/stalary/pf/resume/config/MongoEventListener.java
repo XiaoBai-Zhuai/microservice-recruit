@@ -17,8 +17,6 @@ import java.time.LocalDateTime;
 /**
  * MongoEventListener
  *
- * @author lirongqian
- * @since 2018/04/13
  */
 @Component
 @Slf4j

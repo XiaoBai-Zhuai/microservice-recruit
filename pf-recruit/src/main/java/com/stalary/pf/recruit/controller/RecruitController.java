@@ -12,16 +12,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * RecruitController
- *
-
- */
-
-/**
  * @model RecruitController
  * @description 招聘相关接口
- * @author lirongqian
- * @since 2018/04/17
  **/
 @RestController
 @RequestMapping("/recruit")
@@ -39,6 +31,7 @@ public class RecruitController {
     @PostMapping
     public ResponseMessage add(
             @RequestBody RecruitEntity recruit) {
+        log.info("recruit: " + recruit);
         RecruitEntity saveRecruit = recruitService.saveRecruit(recruit);
         return ResponseMessage.successMessage(saveRecruit);
     }

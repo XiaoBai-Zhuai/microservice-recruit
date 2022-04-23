@@ -11,8 +11,6 @@ import javax.annotation.Resource;
  * CompanyController
  *
  * @description 公司相关接口
- * @author lirongqian
- * @since 2018/04/14
  */
 @RestController
 @RequestMapping("/company")

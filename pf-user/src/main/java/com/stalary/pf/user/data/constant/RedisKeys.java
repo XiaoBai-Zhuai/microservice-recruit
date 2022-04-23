@@ -3,8 +3,6 @@ package com.stalary.pf.user.data.constant;
 /**
  * RedisKeys
  *
- * @author lirongqian
- * @since 2018/04/20
  */
 public class RedisKeys {
 
@@ -14,8 +12,8 @@ public class RedisKeys {
     /** userId:user缓存 **/
     public static final String USER_ID = "user_id";
 
-    /** 手机验证码缓存 **/
-    public static final String PHONE_CODE = "phone_code";
+    /** 验证码缓存 **/
+    public static final String VERIFY_CODE = "verify_code";
 
     /** 投递列表缓存 **/
     public static final String RESUME_SEND = "resume_send";

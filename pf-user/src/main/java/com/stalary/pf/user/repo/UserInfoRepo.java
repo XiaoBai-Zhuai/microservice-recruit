@@ -6,11 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/**
- * @author Stalary
- * @description
- * @date 2018/4/22
- */
+
 @Repository
 public interface UserInfoRepo extends JpaRepository<UserInfoEntity, Long> {
 

@@ -11,11 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-/**
- * @author Stalary
- * @description
- * @date 2018/12/31
- */
+
 @FeignClient(name = "pf-user")
 @Component
 public interface UserClient {

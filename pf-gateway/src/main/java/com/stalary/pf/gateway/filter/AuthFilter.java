@@ -33,8 +33,6 @@ import java.util.concurrent.TimeUnit;
 /**
  * AuthFilter
  *
- * @author lirongqian
- * @since 2018/12/31
  */
 @Slf4j
 @Component
@@ -71,7 +69,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
             token = token.split(" ")[1];
         }
         if (StringUtils.isEmpty(projectKey)) {
-            ResponseMessage<ProjectInfo> project = userCenterClient.getProjectInfo("leader直聘", "17853149599");
+            ResponseMessage<ProjectInfo> project = userCenterClient.getProjectInfo("leader直聘", "18229809790");
             if (project.isSuccess()) {
                 projectKey = project.getData().getKey();
             }
@@ -82,6 +80,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
         }
         // 对需要登陆的接口进行验证
         String path = exchange.getRequest().getPath().pathWithinApplication().value();
+        log.info("path是什么：" + path);
         List<String> authList = Lists.newArrayList(authArray);
         if (authList.contains(path) && StringUtils.isBlank(userId)) {
             throw new MyException(ResultEnum.NEED_LOGIN);

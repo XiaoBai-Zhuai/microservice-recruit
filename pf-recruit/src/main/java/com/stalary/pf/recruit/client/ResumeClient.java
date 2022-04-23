@@ -13,11 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-/**
- * @author Stalary
- * @description
- * @date 2019/1/8
- */
+
 @FeignClient(name = "pf-resume")
 @Component
 public interface ResumeClient {

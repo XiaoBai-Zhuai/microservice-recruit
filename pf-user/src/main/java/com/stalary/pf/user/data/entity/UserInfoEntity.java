@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -33,8 +32,7 @@ import java.util.Date;
  **/
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
-@Table(name = "userInfo")
+@Table(name = "user_info")
 @Entity
 public class UserInfoEntity {
 
@@ -75,4 +73,13 @@ public class UserInfoEntity {
     @CreationTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
+
+    public UserInfoEntity(Long userId, String name) {
+        this.name = name;
+        this.userId = userId;
+    }
+
+    public UserInfoEntity() {
+
+    }
 }

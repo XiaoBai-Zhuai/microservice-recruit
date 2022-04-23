@@ -1,7 +1,6 @@
 package com.stalary.pf.recruit.service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.stalary.lightmqclient.facade.Producer;
 import com.stalary.pf.recruit.client.ResumeClient;
 import com.stalary.pf.recruit.client.UserClient;
 import com.stalary.pf.recruit.data.constant.Constant;
@@ -16,12 +15,10 @@ import com.stalary.pf.recruit.exception.ResultEnum;
 import com.stalary.pf.recruit.repo.CompanyRepo;
 import com.stalary.pf.recruit.repo.RecruitRepo;
 import com.stalary.pf.recruit.util.RecruitUtil;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -38,8 +35,6 @@ import java.util.stream.Collectors;
 /**
  * RecruitService
  *
- * @author lirongqian
- * @since 2018/04/17
  */
 @Service
 @Slf4j
@@ -52,7 +47,7 @@ public class RecruitService {
     private ResumeClient resumeClient;
 
     @Resource
-    private Producer producer;
+    private RocketMQTemplate rocketMQTemplate;
 
     @Resource(name = "stringRedisTemplate")
     private StringRedisTemplate redis;
@@ -174,6 +169,7 @@ public class RecruitService {
      **/
     public RecruitEntity saveRecruit(RecruitEntity recruit) {
         recruit.serializeFields();
+        log.info("recruit: " + recruit);
         RecruitEntity save = recruitRepo.save(recruit);
         save.deserializeFields();
         // 异步刷新全量缓存
@@ -307,8 +303,8 @@ public class RecruitService {
                     .stream()
                     .collect(Collectors.toMap(c -> String.valueOf(c.getId()), JSONObject::toJSONString));
             redisHash.putAll(Constant.COMPANY_REDIS_PREFIX, redisMap);
-            // 缓存七天
-            redis.expire(Constant.COMPANY_REDIS_PREFIX, 7, TimeUnit.DAYS);
+            // 缓存5分钟
+            redis.expire(Constant.COMPANY_REDIS_PREFIX, 5, TimeUnit.MINUTES);
         }
     }
 
@@ -337,12 +333,14 @@ public class RecruitService {
      **/
     public void postResume(Long userId, Long recruitId, String title) {
         String json = JSONObject.toJSONString(new SendResume(userId, recruitId, title, LocalDateTime.now()));
+        Map<String, String> map = new HashMap<>();
+        map.put("value", json);
         // 处理简历
-        producer.send(Constant.HANDLE_RESUME, json);
+        rocketMQTemplate.convertAndSend(Constant.HANDLE_RESUME, map);
         // 向接受方发送通知
-        producer.send(Constant.RECEIVE_RESUME, json);
+        rocketMQTemplate.convertAndSend(Constant.RECEIVE_RESUME, map);
         // 向投递方发送通知
-        producer.send(Constant.SEND_RESUME, json);
+        rocketMQTemplate.convertAndSend(Constant.SEND_RESUME, map);
     }
 
     /**

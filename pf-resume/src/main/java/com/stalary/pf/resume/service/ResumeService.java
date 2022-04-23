@@ -29,8 +29,6 @@ import java.util.stream.Collectors;
 /**
  * ResumeService
  *
- * @author lirongqian
- * @since 2018/04/14
  */
 @Service
 @Slf4j

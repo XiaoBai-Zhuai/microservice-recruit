@@ -32,14 +32,33 @@
             <version>${sentinel.version}</version>
         </dependency>
         <!-- lightmq -->
-        <dependency>
+        <!--<dependency>
             <groupId>com.stalary</groupId>
             <artifactId>lightmqclient</artifactId>
             <version>0.0.1</version>
-            <exclusions><!-- 去掉默认配置 -->
+            <exclusions>&lt;!&ndash; 去掉默认配置 &ndash;&gt;
                 <exclusion>
                     <groupId>ch.qos.logback</groupId>
                     <artifactId>logback-classic</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>-->
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-spring-boot-starter</artifactId>
+            <version>${rocketmq.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-webmvc</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>

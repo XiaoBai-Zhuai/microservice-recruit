@@ -8,11 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-/**
- * @author Stalary
- * @description
- * @date 2018/12/31
- */
+
 @FeignClient(name = "pf-user")
 @Component
 public interface UserClient {

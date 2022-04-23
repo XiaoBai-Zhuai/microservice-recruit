@@ -48,7 +48,7 @@ public class ClientService {
     public void genProjectInfo() {
         // 获取项目信息
         if (projectInfo == null) {
-            ResponseMessage<ProjectInfo> info = userCenterClient.getProjectInfo("leader直聘", "17853149599");
+            ResponseMessage<ProjectInfo> info = userCenterClient.getProjectInfo("leader直聘", "18229809790");
             if (info.isSuccess()) {
                 projectInfo = info.getData();
             } else {
@@ -72,24 +72,34 @@ public class ClientService {
         // 写入项目id，用于请求用户中心
         user.setProjectId(projectInfo.getProjectId());
         ResponseMessage<String> response = new ResponseMessage<>();
-        if (Constant.UPDATE_PASSWORD.equals(type)) {
-            response = userCenterClient.updatePassword(projectInfo.getKey(), user);
-        } else if (Constant.UPDATE.equals(type)) {
-            response = userCenterClient.updateInfo(projectInfo.getKey(), user);
-        } else if (Constant.REGISTER.equals(type)) {
-            // 注册需要先校验短信验证码
-            String code = redis.opsForValue().get(Constant.getKey(RedisKeys.PHONE_CODE, user.getPhone()));
-            if (StringUtils.isEmpty(code)) {
-                throw new MyException(ResultEnum.CODE_EXPIRE);
+        switch (type) {
+            case Constant.UPDATE_PASSWORD: { // 修改密码
+                response = userCenterClient.updatePassword(projectInfo.getKey(), user);
+                break;
             }
-            if (!code.equals(user.getCode())) {
-                throw new MyException(ResultEnum.CODE_ERROR);
+            case Constant.UPDATE: { // 修改用户信息
+                response = userCenterClient.updateInfo(projectInfo.getKey(), user);
+                break;
             }
-            response = userCenterClient.register(projectInfo.getKey(), user);
-        } else if (Constant.LOGIN.equals(type)) {
-            response = userCenterClient.login(projectInfo.getKey(), user);
-        } else {
-            log.warn("postUser type " + type + " error");
+            case Constant.REGISTER: { // 注册
+                // 注册需要先校验短信验证码
+                String code = redis.opsForValue().get(Constant.getKey(RedisKeys.VERIFY_CODE, user.getEmail()));
+                if (StringUtils.isEmpty(code)) {
+                    throw new MyException(ResultEnum.CODE_EXPIRE);
+                }
+                if (!code.equals(user.getCode())) {
+                    throw new MyException(ResultEnum.CODE_ERROR);
+                }
+                response = userCenterClient.register(projectInfo.getKey(), user);
+                break;
+            }
+            case Constant.LOGIN: { // 登录
+                response = userCenterClient.login(projectInfo.getKey(), user);
+                break;
+            }
+            default: {
+                log.warn("postUser type " + type + " error");
+            }
         }
         if (!response.isSuccess()) {
             throw new MyException(response.getCode(), response.getMsg());
@@ -111,6 +121,7 @@ public class ClientService {
             if (response.isSuccess()) {
                 User user = response.getData();
                 // token是临时的，所以只缓存一天
+                // todo: 缓存失效应该重新登录
                 redis.opsForValue().set(redisKey, JSONObject.toJSONString(user), 1, TimeUnit.DAYS);
                 UserHolder.set(user);
                 return user;

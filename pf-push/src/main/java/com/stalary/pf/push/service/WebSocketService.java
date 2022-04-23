@@ -24,8 +24,6 @@ import java.util.concurrent.TimeUnit;
 /**
  * WebSocketService
  *
- * @author lirongqian
- * @since 2018/06/07
  */
 @Service
 @ServerEndpoint("/push/ws/{userId}")

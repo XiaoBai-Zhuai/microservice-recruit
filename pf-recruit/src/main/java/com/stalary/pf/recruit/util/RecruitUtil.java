@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * RecruitUtil
  *
- * @author lirongqian
- * @since 2019/01/03
  */
 public class RecruitUtil {
 

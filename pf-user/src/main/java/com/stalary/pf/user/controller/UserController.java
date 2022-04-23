@@ -14,6 +14,7 @@ import com.stalary.pf.user.holder.UserHolder;
 import com.stalary.pf.user.service.ClientService;
 import com.stalary.pf.user.service.UserInfoService;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -49,7 +50,10 @@ public class UserController {
     @PostMapping
     public ResponseMessage register(
             @RequestBody Applicant applicant) {
-        return clientService.postUser(applicant, Constant.REGISTER);
+        ResponseMessage resp = clientService.postUser(applicant, Constant.REGISTER);
+        /*// 保存到数据库和es里
+        UserInfoEntity user = new UserInfoEntity()*/
+        return resp;
     }
 
     /**
@@ -209,7 +213,8 @@ public class UserController {
 
     ///////////////////////// 内部服务使用的接口 //////////////////////////////////
 
-    @PostMapping("/avatar")
+    @PostMapping(value = "/avatar", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
     public ResponseMessage uploadAvatar(
             @RequestBody UploadAvatar uploadAvatar) {
         boolean flag = userInfoService.uploadAvatar(uploadAvatar);

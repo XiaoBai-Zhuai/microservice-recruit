@@ -6,12 +6,6 @@ import feign.Retryer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * FeignConfig
- *
- * @author lirongqian
- * @since 2018/10/17
- */
 @Configuration
 public class FeignConfig {
 

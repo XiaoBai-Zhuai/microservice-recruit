@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 /**
  * CompanyAndJob
  *
- * @author lirongqian
- * @since 2019/02/14
  */
 @Data
 @NoArgsConstructor

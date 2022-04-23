@@ -5,15 +5,18 @@ spring:
   data:
     mongodb:
       username: root
-      password: li197910
+      password: root123456
+      host: 182.61.27.77
+      port: 27017
+      database: personfilter
   cloud:
     nacos:
       discovery:
-        server-addr: nacos.stalary.com
+        server-addr: 182.61.27.77:8848
     sentinel:
       transport:
         port: 10003
-        dashboard: sentinel.stalary.com
+        dashboard: 182.61.27.77:8858
   zipkin:
     base-url: http://zipkin.stalary.com
   sleuth:

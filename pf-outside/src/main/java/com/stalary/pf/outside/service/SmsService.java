@@ -22,8 +22,6 @@ import java.util.concurrent.TimeUnit;
 /**
  * SmsService
  *
- * @author lirongqian
- * @since 2018/04/23
  */
 @Service
 @Slf4j
@@ -50,7 +48,7 @@ public class SmsService {
         String randomCode = RandomStringUtils.randomNumeric(6);
         if (sendSms(phone, randomCode)) {
             // 有效期一天
-            redis.opsForValue().set(Constant.getKey(Constant.PHONE_CODE, phone), randomCode, 1, TimeUnit.DAYS);
+            redis.opsForValue().set(Constant.getKey(Constant.VERIFY_CODE, phone), randomCode, 1, TimeUnit.DAYS);
             return randomCode;
         }
         return null;

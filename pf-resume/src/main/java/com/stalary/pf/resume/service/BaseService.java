@@ -7,8 +7,6 @@ import java.util.List;
 /**
  * BaseService
  *
- * @author lirongqian
- * @since 2018/04/14
  */
 public abstract class BaseService<T, R extends BaseRepo<T, Long>>  {
 

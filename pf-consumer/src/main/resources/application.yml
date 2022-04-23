@@ -5,7 +5,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: nacos.stalary.com
+        server-addr: 182.61.27.77:8848
   zipkin:
     base-url: http://zipkin.stalary.com
   sleuth:
@@ -14,11 +14,5 @@ spring:
 logging:
   level:
     com.stalary.pf.consumer.client: DEBUG # feign日志
-com:
-  stalary:
-    lightmq:
-      consumer: true
-      order: true
-      group: master
-      auto: true
-      url: lightmq.stalary.com
+rocketmq:
+  name-server: 180.76.116.132:9876

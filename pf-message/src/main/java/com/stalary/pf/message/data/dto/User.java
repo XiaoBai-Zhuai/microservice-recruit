@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author stalary
  * @model User
  * @description 用户对象
  * @field userId 用户id

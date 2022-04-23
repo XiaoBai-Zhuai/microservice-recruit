@@ -14,22 +14,22 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * QiNiuService
  *
- * @author lirongqian
- * @since 2018/04/23
  */
 @Service
 @Slf4j
 public class QiNiuService {
 
     /**
+     * TODO 配置放到nacos上去
      * 七牛云
      **/
-    private static String ACCESS_KEY = "zfg7aGCs98DbKp_zKHzOAwzd6BoPhLjPkO5ohzEG";
-    private static String SECRET_KEY = "l-fs00VcPP2nZRBKZmJj7LeSShi2wKxSMN5RL10w";
-    private static String BUCKET_NAME = "stalary";
-    private static String QINIU_IMAGE_DOMAIN = "http://qiniu.stalary.com/";
+    private static String ACCESS_KEY = "GoLY9xkGmfGqxunzyBfUlLPZuSh-g8z5JsdQGY7r";
+    private static String SECRET_KEY = "n3RI7um0WqYhzW82Ijc8HOYspCqEVuzn1ib1diS3";
+    private static String BUCKET_NAME = "m-recruit";
+    private static String QINIU_IMAGE_DOMAIN = "http://rasklg6c3.hn-bkt.clouddn.com/";
+
     private Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
-    Configuration cfg = new Configuration(Zone.huadong());
+    Configuration cfg = new Configuration(Zone.huanan());
     private UploadManager uploadManager = new UploadManager(cfg);
 
     private String getUpToken() {

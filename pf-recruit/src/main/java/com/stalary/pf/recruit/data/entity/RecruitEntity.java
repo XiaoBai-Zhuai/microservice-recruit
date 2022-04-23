@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -31,8 +32,10 @@ import java.util.List;
 @Entity
 public class RecruitEntity extends BaseEntity {
 
+    @Column(name = "company_id")
     private Long companyId;
 
+    @Column(name = "hr_id")
     private Long hrId;
 
     private String content;

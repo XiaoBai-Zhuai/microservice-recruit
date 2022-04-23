@@ -1,16 +1,21 @@
 package com.stalary.pf.outside.service;
 
+import com.stalary.pf.outside.data.Constant;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.security.Security;
 import java.util.Date;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 /**
  * MailService
@@ -23,7 +28,11 @@ import java.util.Properties;
 @RefreshScope
 public class MailService {
 
+    private static final String REGISTER_SUBJECT = "Leader直聘注册验证码";
+
     private final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
+
+    private static final long EXPIRE_TIME = 10;
 
     @Value("${spring.mail.username}")
     private String from;
@@ -33,6 +42,9 @@ public class MailService {
 
     @Value("${spring.mail.host}")
     private String host;
+
+    @Resource(name = "stringRedisTemplate")
+    private StringRedisTemplate redis;
 
     public void sendEmail(String to, String subject, String message) {
         try {
@@ -74,6 +86,23 @@ public class MailService {
             e.printStackTrace();
         }
 
+    }
+
+    /**
+     * 发送注册验证码
+     * @param email
+     * @param randomCode
+     */
+    public String sendVerCode(String email) {
+        log.info("邮箱为: " + email);
+        String randomCode = RandomStringUtils.randomNumeric(6);
+        // 将验证码放到redis里
+        redis.opsForValue().set(Constant.getKey(Constant.VERIFY_CODE, email), randomCode, EXPIRE_TIME, TimeUnit.MINUTES);
+        String message = "欢迎注册leader直聘，您的验证码为：\n\ncode: " + randomCode;
+        message += "\n\n验证码有效期为10分钟，请尽快完成注册!";
+        // 发送邮件
+        sendEmail(email, REGISTER_SUBJECT, message);
+        return randomCode;
     }
 
 

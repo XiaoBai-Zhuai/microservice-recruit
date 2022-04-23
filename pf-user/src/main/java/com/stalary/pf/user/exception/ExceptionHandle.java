@@ -9,11 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-/**
- * @author Stalary
- * @description
- * @date 2018/04/14
- */
+
 @ControllerAdvice
 @Slf4j
 public class ExceptionHandle {

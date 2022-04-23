@@ -35,8 +35,6 @@ import java.util.Map;
 /**
  * UserInfoService
  *
- * @author lirongqian
- * @since 2019/01/01
  */
 @Service
 public class UserInfoService {

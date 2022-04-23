@@ -8,11 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/**
- * @author Stalary
- * @description
- * @date 2018/4/17
- */
+
 @Repository
 public interface RecruitRepo extends BaseRepo<RecruitEntity, Long> {
 

@@ -2,11 +2,11 @@ spring:
   cloud:
     nacos:
       config:
-        server-addr: nacos.stalary.com
+        server-addr: 182.61.27.77:8848
         file-extension: yml
         shared-dataids: printlog.yml,redis.yml
         refreshable-dataids: redis.yml
   profiles:
-    active: prod
+    active: dev
   application:
     name: pf-push
